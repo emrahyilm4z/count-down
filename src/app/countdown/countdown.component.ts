@@ -19,7 +19,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const augustFirst = new Date(new Date().getFullYear(), 7, 1); // 7 is August (0-indexed)
+    const augustFirst = new Date(new Date().getFullYear(), 7, 9); // 7 is August (0-indexed)
     this.targetDate = augustFirst.toISOString().split('T')[0];
     this.startTimer();
   }

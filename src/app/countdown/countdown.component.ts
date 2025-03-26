@@ -16,6 +16,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
   seconds: number = 0;
   targetDate: string = '';
   private timerInterval: any;
+  imagePath = 'assets/images/yasin.JPG';
 
   ngOnInit() {
 

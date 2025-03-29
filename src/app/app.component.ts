@@ -6,7 +6,7 @@ import { CountdownComponent } from './countdown/countdown.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, CountdownComponent],
+  imports: [CommonModule, CountdownComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

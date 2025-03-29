@@ -19,16 +19,31 @@ export class CountdownComponent implements OnInit, OnDestroy {
   imagePath = 'assets/images/yasin.JPG';
 
   ngOnInit() {
-
     const augustFirst = new Date(new Date().getFullYear(), 7, 9); // 7 is August (0-indexed)
     this.targetDate = augustFirst.toISOString().split('T')[0];
     this.startTimer();
+
+    setInterval(() => {
+      const drop = document.createElement('div');
+      drop.className = 'yasin-drop';
+      
+      drop.style.left = Math.random() * window.innerWidth + 'px';
+      
+      drop.style.animationDuration = Math.random() * 2 + 1 + 's';
+      
+      document.body.appendChild(drop);
+      
+      setTimeout(() => {
+        drop.remove();
+      }, parseFloat(drop.style.animationDuration) * 1000);
+    }, 200);
   }
 
   ngOnDestroy() {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
     }
+    document.querySelectorAll('.yasin-drop').forEach(drop => drop.remove());
   }
 
   startTimer() {

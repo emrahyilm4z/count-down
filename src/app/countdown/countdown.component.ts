@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {CountDownService} from '../state/count-down.service';
 
 @Component({
   selector: 'app-countdown',
@@ -16,23 +17,31 @@ export class CountdownComponent implements OnInit, OnDestroy {
   seconds: number = 0;
   targetDate: string = '';
   private timerInterval: any;
-  imagePath = 'assets/images/yasin.JPG';
+
+  constructor(private countDownService: CountDownService) {}
 
   ngOnInit() {
-    const augustFirst = new Date(new Date().getFullYear(), 7, 9); // 7 is August (0-indexed)
+
+    this.countDownService.getCountDowns().subscribe(
+      (data) => {
+        console.log("Data received from backend:", data);
+      }
+    )
+
+    const augustFirst = new Date(new Date().getFullYear(), 7, 9);
     this.targetDate = augustFirst.toISOString().split('T')[0];
     this.startTimer();
 
     setInterval(() => {
       const drop = document.createElement('div');
       drop.className = 'yasin-drop';
-      
+
       drop.style.left = Math.random() * window.innerWidth + 'px';
-      
+
       drop.style.animationDuration = Math.random() * 2 + 1 + 's';
-      
+
       document.body.appendChild(drop);
-      
+
       setTimeout(() => {
         drop.remove();
       }, parseFloat(drop.style.animationDuration) * 1000);
